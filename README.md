@@ -66,3 +66,71 @@ Each tool:
 -Executes transformation logic
 -Returns structured output
 
+FILE STRUCTURE:
+PrintX/
+├── ARCHITECTURE.md            # design and flow documentation
+├── QUICK_START.md             # setup & run instructions
+├── README.md                  # project overview & commands
+├── docker-compose.yml         # multi‑container orchestration
+├── package.json               # root scripts (dev & docker helpers)
+├── .gitignore                 # global ignores
+│
+├── Backend/                   # Express REST API
+│   ├── package.json           # deps: express, axios, multer, cors, dotenv
+│   ├── tsconfig.json
+│   ├── Dockerfile
+│   ├── .env.example
+│   ├── src/
+│   │   ├── app.ts             # Express app config
+│   │   ├── index.ts           # server entrypoint
+│   │   ├── clients/           # HTTP client to Strands agent
+│   │   ├── routes/            # fileRoutes, printerRoutes, healthRoutes
+│   │   ├── middleware/        # errorHandler
+│   │   └── types/             # shared TypeScript interfaces
+│
+├── Strand_agents/             # AI reasoning & tool orchestration
+│   ├── package.json           # deps: express, @aws-sdk/client-bedrock-runtime, dotenv, cors
+│   ├── tsconfig.json
+│   ├── Dockerfile
+│   ├── .env.example
+│   ├── src/
+│   │   ├── app.ts             # Express app config
+│   │   ├── index.ts           # server entrypoint
+│   │   ├── clients/           # bedrock.client.ts (LLM calls)
+│   │   ├── services/          # orchestrator logic
+│   │   ├── tools/             # deterministic tool registry
+│   │   ├── routes/            # agentRoutes (reason, printer-task, health)
+│   │   └── middleware/        # errorHandler
+│
+└── frontend/                  # React single‑page application
+    ├── package.json           # deps: react, tailwind, etc.
+    ├── jsconfig.json
+    ├── tailwind.config.js
+    ├── Dockerfile
+    ├── public/
+    │   └── index.html
+    ├── src/
+    │   ├── components/        # UI building blocks
+    │   ├── pages/             # Home, Workspace, Shopkeeper views
+    │   ├── services/          # chatService, fileService, shopService
+    │   ├── hooks/             # use-toast.js
+    │   ├── styles/            # CSS files
+    │   └── lib/               # utils.js
+Layer	Key Technologies
+-Frontend	React, Tailwind CSS, Craco, JavaScript/JSX
+-Backend	Node.js, Express, TypeScript, Axios, Multer
+-AI Agent	Node.js, Express, TypeScript, AWS Bedrock SDK
+-Common utilities	dotenv, cors, ts-node (dev), Jest (placeholder)
+-Build/Deploy	TypeScript compiler, Docker & Docker Compose
+-Version control	Git (pushed to GitHub repo)
+
+✓ **Separation of concerns** – Each service has one responsibility
+✓ **HTTP communication** – Loose coupling, easy to scale
+✓ **Type safety** – Full TypeScript throughout
+✓ **Deterministic tools** – No hidden LLM calls in tools
+✓ **Bedrock isolation** – All LLM access via single client
+✓ **Environment config** – No secrets in code
+✓ **Error handling** – Centralized middleware & logging
+
+**See [QUICK_START.md](./QUICK_START.md) for step-by-step 
+    
