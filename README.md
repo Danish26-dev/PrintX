@@ -67,6 +67,8 @@ Each tool:
 -Returns structured output
 
 FILE STRUCTURE:
+
+
 PrintX/
 ├── ARCHITECTURE.md            # design and flow documentation
 ├── QUICK_START.md             # setup & run instructions
@@ -116,6 +118,9 @@ PrintX/
     │   ├── hooks/             # use-toast.js
     │   ├── styles/            # CSS files
     │   └── lib/               # utils.js
+
+
+    
 Layer	Key Technologies
 -Frontend	React, Tailwind CSS, Craco, JavaScript/JSX
 -Backend	Node.js, Express, TypeScript, Axios, Multer
