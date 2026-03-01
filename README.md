@@ -12,24 +12,29 @@ Traditional print shop workflows are manual and inefficient:
 5.Sensitive documents remain stored without lifecycle control
 
 PrintX restructures this workflow into a deterministic execution pipeline:
-1. Upload document
-2. Interpret instruction using LLM
-3. Execute structured editing tools
-4. Generate print-ready output
-5. Send to printer
-6. Remove temporary files
+1.Upload
+  ↓
+2.LLM Interpretation(amazon bedrock claude)
+  ↓
+3.Deterministic Tool Execution(usind strands)
+  ↓
+4.Print-Ready Output
+  ↓
+5.Printer Relay
+  ↓
+6.Automatic Cleanup
 The system is modular and designed for controlled extensibility.
 
 Architecture
 PrintX is divided into two independent services:
-->Frontend
-↓
+Frontend (UI Layer)
+        ↓
 Backend API (Infrastructure Layer)
-↓
-Strands Agent Service (AI Orchestration Layer)
-↓
-Tool Execution
-↓
+        ↓
+Strands Agent (AI Orchestration Layer)
+        ↓
+Deterministic Tools
+        ↓
 Printer Relay
 
 ->Backend (/backend)
@@ -67,68 +72,46 @@ Each tool:
 -Returns structured output
 
 FILE STRUCTURE:
-
-
 PrintX/
-├── ARCHITECTURE.md            # design and flow documentation
-├── QUICK_START.md             # setup & run instructions
-├── README.md                  # project overview & commands
-├── docker-compose.yml         # multi‑container orchestration
-├── package.json               # root scripts (dev & docker helpers)
-├── .gitignore                 # global ignores
-│
-├── Backend/                   # Express REST API
-│   ├── package.json           # deps: express, axios, multer, cors, dotenv
-│   ├── tsconfig.json
-│   ├── Dockerfile
-│   ├── .env.example
-│   ├── src/
-│   │   ├── app.ts             # Express app config
-│   │   ├── index.ts           # server entrypoint
-│   │   ├── clients/           # HTTP client to Strands agent
-│   │   ├── routes/            # fileRoutes, printerRoutes, healthRoutes
-│   │   ├── middleware/        # errorHandler
-│   │   └── types/             # shared TypeScript interfaces
-│
-├── Strand_agents/             # AI reasoning & tool orchestration
-│   ├── package.json           # deps: express, @aws-sdk/client-bedrock-runtime, dotenv, cors
-│   ├── tsconfig.json
-│   ├── Dockerfile
-│   ├── .env.example
-│   ├── src/
-│   │   ├── app.ts             # Express app config
-│   │   ├── index.ts           # server entrypoint
-│   │   ├── clients/           # bedrock.client.ts (LLM calls)
-│   │   ├── services/          # orchestrator logic
-│   │   ├── tools/             # deterministic tool registry
-│   │   ├── routes/            # agentRoutes (reason, printer-task, health)
-│   │   └── middleware/        # errorHandler
-│
-└── frontend/                  # React single‑page application
-    ├── package.json           # deps: react, tailwind, etc.
-    ├── jsconfig.json
-    ├── tailwind.config.js
-    ├── Dockerfile
-    ├── public/
-    │   └── index.html
-    ├── src/
-    │   ├── components/        # UI building blocks
-    │   ├── pages/             # Home, Workspace, Shopkeeper views
-    │   ├── services/          # chatService, fileService, shopService
-    │   ├── hooks/             # use-toast.js
-    │   ├── styles/            # CSS files
-    │   └── lib/               # utils.js
-
-
+├── Backend/            # Infrastructure API (Express + TS)
+├── Strand_agents/      # AI Orchestration Service
+├── frontend/           # React SPA
+├── docker-compose.yml
+├── ARCHITECTURE.md
+├── QUICK_START.md
+└── README.md
     
 Layer	Key Technologies
--Frontend	React, Tailwind CSS, Craco, JavaScript/JSX
--Backend	Node.js, Express, TypeScript, Axios, Multer
--AI Agent	Node.js, Express, TypeScript, AWS Bedrock SDK
--Common utilities	dotenv, cors, ts-node (dev), Jest (placeholder)
--Build/Deploy	TypeScript compiler, Docker & Docker Compose
--Version control	Git (pushed to GitHub repo)
+| Layer           | Technologies                                  |
+| --------------- | --------------------------------------------- |
+| Frontend        | React, Tailwind CSS                           |
+| Backend         | Node.js, Express, TypeScript, Multer          |
+| AI Agent        | Node.js, Express, TypeScript, AWS Bedrock SDK |
+| Orchestration   | Strands SDK                                   |
+| Deployment      | Docker, Docker Compose                        |
+| Version Control | Git                                           |
 
+🔐 Privacy by Design
+
+PrintX enforces lifecycle control:
+-Temporary file storage only
+-Automatic cleanup after execution
+-No long-term retention of sensitive documents
+-Centralized Bedrock access
+-Environment-based secret configuration
+-This ensures:
+-Predictable execution
+-Auditability
+
+Design Principles:
+-Strict separation of infrastructure and AI orchestration
+-Deterministic tools (no hidden LLM calls)
+-Centralized LLM client access
+-Type-safe implementation (TypeScript across services)
+-Loosely coupled HTTP communication
+-Dockerized multi-service deployment
+
+Reduced data exposure risk
 ✓ **Separation of concerns** – Each service has one responsibility
 ✓ **HTTP communication** – Loose coupling, easy to scale
 ✓ **Type safety** – Full TypeScript throughout
@@ -137,5 +120,16 @@ Layer	Key Technologies
 ✓ **Environment config** – No secrets in code
 ✓ **Error handling** – Centralized middleware & logging
 
-**See [QUICK_START.md](./QUICK_START.md) for step-by-step 
-    
+⚙️ Getting Started
+For setup and local development:
+See → QUICK_START.md
+For architecture and internal flow documentation:
+See → ARCHITECTURE.md
+
+📌 Key Differentiator
+PrintX is not an AI print assistant:
+-It is a structured AI-orchestrated execution system where:
+-Infrastructure remains deterministic
+-AI handles reasoning only
+-Tools execute predictably
+-Privacy is enforced by lifecycle control
