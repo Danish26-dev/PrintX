@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  strands-agent:
+    build:
+      context: ./Strand_agents
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - BEDROCK_MODEL_ID=anthropic.claude-3-sonnet-20240229-v1:0
+      - NODE_ENV=production
+    container_name: amd-strands-agent
+
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - STRANDS_AGENT_URL=http://strands-agent:4000
+      - NODE_ENV=production
+    depends_on:
+      - strands-agent
+    container_name: amd-backend
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3001/api
+      - NODE_ENV=production
+    depends_on:
+      - backend
+    container_name: amd-frontend

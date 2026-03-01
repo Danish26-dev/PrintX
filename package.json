@@ -1,0 +1,26 @@
+{
+  "name": "amd-full-stack",
+  "version": "1.0.0",
+  "description": "AMD Full Stack - React Frontend, Express Backend, AI Agent with Bedrock",
+  "scripts": {
+    "dev:backend": "cd Backend && npm run dev",
+    "dev:agent": "cd Strand_agents && npm run dev",
+    "dev:frontend": "cd frontend && npm start",
+    "build:all": "cd Backend && npm run build && cd ../Strand_agents && npm run build && cd ../frontend && npm run build",
+    "start:backend": "cd Backend && npm start",
+    "start:agent": "cd Strand_agents && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down"
+  },
+  "keywords": [
+    "react",
+    "express",
+    "bedrock",
+    "ai",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT"
+}
