@@ -3,7 +3,7 @@ PrintX is an agentic AI system that autonomously executes document workflows —
 
 ---
 
-## ⚡ Problem
+##  Problem
 
 Document workflows today are:
 
@@ -14,7 +14,7 @@ Document workflows today are:
 
 ---
 
-## 💡 Solution
+##  Solution
 PrintX is an AI-orchestrated document processing and printing system that replaces manual print workflows with structured automation.
 The system enables natural language document modification, controlled print execution, and automatic cleanup of temporary files. It is designed with strict separation between infrastructure and AI orchestration layers.
 
@@ -32,7 +32,7 @@ PrintX transforms:
 
 ---
 
-## 🔄 Execution Flow
+##  Execution Flow
 
 ```
 User Upload + Instruction
@@ -50,12 +50,12 @@ Automatic Cleanup
 
 ---
 
-## 🧠 Architecture Overview
+##  Architecture Overview
 <img width="1824" height="861" alt="printxlfow" src="https://github.com/user-attachments/assets/34299077-7b8e-4ca2-948e-5d4a90c95ee5" />
 
 ---
 
-## 🧩 System Design
+##  System Design
 
 ### 🔹 Frontend
 
@@ -90,7 +90,7 @@ Automatic Cleanup
 
 ---
 
-## 🏪 Channel-Based Model
+## Channel-Based Model
 
 * Each shop = one agent
 * Users join via link
@@ -98,7 +98,7 @@ Automatic Cleanup
 
 ---
 
-## 👥 User Journeys
+##  User Journeys
 
 ### Shopkeeper
 
@@ -187,7 +187,7 @@ PrintX/
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 | Layer      | Technology                   |
 | ---------- | ---------------------------- |
@@ -198,7 +198,7 @@ PrintX/
 
 ---
 
-## ⚙️ Getting Started
+##  Getting Started
 
 ```bash
 cd Backend && npm install
@@ -226,20 +226,20 @@ docker-compose up --build
 
 ---
 
-## 🔐 Privacy
+##  Privacy
 
 * No persistent file storage
 * Automatic cleanup
 * Secure environment configs
 
 
-## 🎯 Key Differentiator
+##  Key Differentiator
 
 > Autonomous execution engine (not just AI assistant)
 
 ---
 
-## 📈 Impact
+##  Impact
 
 * 80–90% time saved
 * Fully automated workflows
