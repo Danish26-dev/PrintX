@@ -1,18 +1,19 @@
-PrintX-Autonomous Printing with Privacy
-```
+PrintX-Autonomous Printing with Privacy:
 PrintX is an agentic AI system that autonomously executes document workflows — from natural language instruction to physical printing — using structured orchestration, deterministic tools, and privacy-first lifecycle control.
-```
 ---
 
 ##  Problem
 
-Document workflows today are:
+In today’s digital-first world, users frequently need to print documents such as assignments, resumes, ID proofs, tickets, and forms. However, the current printing ecosystem is highly fragmented, manual, and inefficient, especially in local print shops.
 
-* Manual and repetitive
-* Time-consuming and error-prone
-* Lacking automation and auditability
-* Unsafe for sensitive data
+Most existing solutions require:
 
+Physical presence at the shop
+Manual file transfer (USB, WhatsApp, Email)
+Verbal communication of print settings
+Human intervention for file formatting and validation
+
+This results in delays, miscommunication, privacy risks, and poor user experience.
 ---
 
 ##  Solution
