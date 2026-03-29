@@ -1,5 +1,5 @@
 ## PrintX-Autonomous Printing with Privacy
----
+
 In today’s digital-first world, users frequently need to print documents such as assignments, resumes, ID proofs, tickets, and forms. However, the current printing ecosystem is highly fragmented, manual, and inefficient, especially in local print shops.
 
 Most existing solutions require:
