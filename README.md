@@ -70,7 +70,7 @@ Each tool:
 -Accepts structured input
 -Executes transformation logic
 -Returns structured output
-
+```
 FILE STRUCTURE:
 PrintX/
 ├── Backend/            # Infrastructure API (Express + TS)
@@ -80,7 +80,7 @@ PrintX/
 ├── ARCHITECTURE.md
 ├── QUICK_START.md
 └── README.md
-    
+```    
 Layer	Key Technologies
 | Layer           | Technologies                                  |
 | --------------- | --------------------------------------------- |
