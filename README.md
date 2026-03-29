@@ -15,7 +15,7 @@ This results in delays, miscommunication, privacy risks, and poor user experienc
 ##  Solution
 PrintX is an AI-orchestrated document processing and printing system that replaces manual print workflows with structured automation.
 The system enables natural language document modification, controlled print execution, and automatic cleanup of temporary files. It is designed with strict separation between infrastructure and AI orchestration layers.
-
+```
 Overview
 Traditional print shop workflows are manual and inefficient:
 1.Documents are shared over messaging platforms
@@ -23,6 +23,7 @@ Traditional print shop workflows are manual and inefficient:
 3.Multiple copies are created repetitivel
 4.Print settings are configured one by one
 5.Sensitive documents remain stored without lifecycle control
+```
 # 🖨️ PrintX — Autonomous Document Execution with Privacy
 PrintX transforms:
 
