@@ -51,20 +51,6 @@ Automatic Cleanup
 ---
 
 ## 🧠 Architecture Overview
-
-```
-Frontend (React)
-        ↓
-Backend API (Express)
-        ↓
-Strands Agent (AI Orchestrator)
-        ↓
-AWS Bedrock (LLM)
-        ↓
-Deterministic Tools
-        ↓
-Printer Relay
-```
 <img width="1824" height="861" alt="printxlfow" src="https://github.com/user-attachments/assets/34299077-7b8e-4ca2-948e-5d4a90c95ee5" />
 
 ---
