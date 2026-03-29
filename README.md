@@ -1,5 +1,5 @@
 PrintX-Autonomous Printing with Privacy
-> PrintX is an agentic AI system that autonomously executes document workflows — from natural language instruction to physical printing — using structured orchestration, deterministic tools, and privacy-first lifecycle control.
+PrintX is an agentic AI system that autonomously executes document workflows — from natural language instruction to physical printing — using structured orchestration, deterministic tools, and privacy-first lifecycle control.
 
 ---
 
@@ -65,6 +65,7 @@ Deterministic Tools
         ↓
 Printer Relay
 ```
+<img width="1824" height="861" alt="printxlfow" src="https://github.com/user-attachments/assets/34299077-7b8e-4ca2-948e-5d4a90c95ee5" />
 
 ---
 
