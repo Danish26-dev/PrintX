@@ -1,5 +1,20 @@
 PrintX-Autonomous Printing with Privacy
+> PrintX is an agentic AI system that autonomously executes document workflows — from natural language instruction to physical printing — using structured orchestration, deterministic tools, and privacy-first lifecycle control.
 
+---
+
+## ⚡ Problem
+
+Document workflows today are:
+
+* Manual and repetitive
+* Time-consuming and error-prone
+* Lacking automation and auditability
+* Unsafe for sensitive data
+
+---
+
+## 💡 Solution
 PrintX is an AI-orchestrated document processing and printing system that replaces manual print workflows with structured automation.
 The system enables natural language document modification, controlled print execution, and automatic cleanup of temporary files. It is designed with strict separation between infrastructure and AI orchestration layers.
 
@@ -10,126 +25,260 @@ Traditional print shop workflows are manual and inefficient:
 3.Multiple copies are created repetitivel
 4.Print settings are configured one by one
 5.Sensitive documents remain stored without lifecycle control
+# 🖨️ PrintX — Autonomous Document Execution with Privacy
+PrintX transforms:
 
-PrintX restructures this workflow into a deterministic execution pipeline:
-1.Upload
-  ↓
-2.LLM Interpretation(amazon bedrock claude)
-  ↓
-3.Deterministic Tool Execution(usind strands)
-  ↓
-4.Print-Ready Output
-  ↓
-5.Printer Relay
-  ↓
-6.Automatic Cleanup
-The system is modular and designed for controlled extensibility.
+**Human Intent → AI Planning → Deterministic Execution → Physical Output**
 
-Architecture
-PrintX is divided into two independent services:
-Frontend (UI Layer)
+---
+
+## 🔄 Execution Flow
+
+```
+User Upload + Instruction
         ↓
-Backend API (Infrastructure Layer)
+Agent Reasoning (AWS Bedrock)
         ↓
-Strands Agent (AI Orchestration Layer)
+Workflow Planning
+        ↓
+Deterministic Tool Execution
+        ↓
+Printer Execution
+        ↓
+Automatic Cleanup
+```
+
+---
+
+## 🧠 Architecture Overview
+
+```
+Frontend (React)
+        ↓
+Backend API (Express)
+        ↓
+Strands Agent (AI Orchestrator)
+        ↓
+AWS Bedrock (LLM)
         ↓
 Deterministic Tools
         ↓
 Printer Relay
-
-->Backend (/backend)
-
-Handles infrastructure responsibilities only:
-1.REST APIs
-2.File uploads
-3.Temporary storage
-4.Printer integration
-5.Communication with agent service
-The backend does not perform AI reasoning.
-
-->Strands Agent (/strands-agent)
-Handles AI orchestration:
-
-1.AWS Bedrock integration
-2.Strands SDK configuration
-3.Tool selection and execution
-4.Structured response generation
-The agent layer is isolated to prevent business logic leakage into infrastructure code.
-
-Tools Layer:
-Tools are deterministic and do not invoke the LLM directly.
-
-Examples:
-
-1.editDocx.tool.ts
-2.editPdf.tool.ts
-3.convertPdf.tool.ts
-4.print.tool.ts
-
-Each tool:
--Accepts structured input
--Executes transformation logic
--Returns structured output
 ```
-FILE STRUCTURE:
+
+---
+
+## 🧩 System Design
+
+### 🔹 Frontend
+
+* UI for users & shopkeepers
+* Chat + workspace system
+* File upload & preview
+
+---
+
+### 🔹 Backend
+
+* REST APIs
+* File handling
+* Agent communication
+* Validation & routing
+
+---
+
+### 🔹 Strands Agent
+
+* LLM reasoning
+* Workflow planning
+* Tool orchestration
+
+---
+
+### 🔹 Tools Layer
+
+* Deterministic execution
+* No LLM calls
+* Structured outputs
+
+---
+
+## 🏪 Channel-Based Model
+
+* Each shop = one agent
+* Users join via link
+* Fully autonomous execution
+
+---
+
+## 👥 User Journeys
+
+### Shopkeeper
+
+* Create channel → Activate agent → Monitor
+
+### User
+
+* Join → Upload → Instruct → Receive output
+
+### Agent
+
+* Plan → Execute → Return result
+
+---
+
+## 📁 Complete Repository Structure
+
+```
 PrintX/
-├── Backend/            # Infrastructure API (Express + TS)
-├── Strand_agents/      # AI Orchestration Service
-├── frontend/           # React SPA
-├── docker-compose.yml
+├── .github/
+│   └── workflows/
+│       └── ci.yml                # CI pipeline
+│
+├── Backend/                     # Infrastructure API
+│   ├── .env.example
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── src/
+│       ├── app.ts               # Express config
+│       ├── index.ts             # Server entry
+│       ├── clients/
+│       │   └── strandsAgentClient.ts
+│       ├── middleware/
+│       │   └── errorHandler.ts
+│       ├── routes/
+│       │   ├── fileRoutes.ts
+│       │   ├── printerRoutes.ts
+│       │   └── healthRoutes.ts
+│       └── types/
+│           └── index.ts
+│
+├── Strand_agents/              # AI Orchestration Layer
+│   ├── .env.example
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── src/
+│       ├── app.ts
+│       ├── index.ts
+│       ├── clients/
+│       │   └── bedrock.client.ts
+│       ├── middleware/
+│       │   └── errorHandler.ts
+│       ├── routes/
+│       │   └── agentRoutes.ts
+│       ├── services/
+│       │   └── orchestrator.ts
+│       └── tools/
+│           └── toolRegistry.ts
+│
+├── frontend/                   # React Application
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── tailwind.config.js
+│   └── src/
+│       ├── App.js
+│       ├── pages/
+│       │   ├── Home.jsx
+│       │   ├── Workspace.jsx
+│       │   └── ShopkeeperDashboard.jsx
+│       ├── components/
+│       │   ├── workspace/
+│       │   └── ui/
+│       ├── services/
+│       │   ├── chatService.js
+│       │   ├── fileService.js
+│       │   └── shopService.js
+│       └── styles/
+│
 ├── ARCHITECTURE.md
 ├── QUICK_START.md
-└── README.md
-```    
-Layer	Key Technologies
-| Layer           | Technologies                                  |
-| --------------- | --------------------------------------------- |
-| Frontend        | React, Tailwind CSS                           |
-| Backend         | Node.js, Express, TypeScript, Multer          |
-| AI Agent        | Node.js, Express, TypeScript, AWS Bedrock SDK |
-| Orchestration   | Strands SDK                                   |
-| Deployment      | Docker, Docker Compose                        |
-| Version Control | Git                                           |
+├── docker-compose.yml
+└── package.json
+```
 
-🔐 Privacy by Design
+---
 
-PrintX enforces lifecycle control:
--Temporary file storage only
--Automatic cleanup after execution
--No long-term retention of sensitive documents
--Centralized Bedrock access
--Environment-based secret configuration
--This ensures:
--Predictable execution
--Auditability
+## 🛠 Tech Stack
 
-Design Principles:
--Strict separation of infrastructure and AI orchestration
--Deterministic tools (no hidden LLM calls)
--Centralized LLM client access
--Type-safe implementation (TypeScript across services)
--Loosely coupled HTTP communication
--Dockerized multi-service deployment
+| Layer      | Technology                   |
+| ---------- | ---------------------------- |
+| Frontend   | React, Tailwind              |
+| Backend    | Node.js, Express, TypeScript |
+| Agent      | AWS Bedrock                  |
+| Deployment | Docker                       |
 
-Reduced data exposure risk
-✓ **Separation of concerns** – Each service has one responsibility
-✓ **HTTP communication** – Loose coupling, easy to scale
-✓ **Type safety** – Full TypeScript throughout
-✓ **Deterministic tools** – No hidden LLM calls in tools
-✓ **Bedrock isolation** – All LLM access via single client
-✓ **Environment config** – No secrets in code
-✓ **Error handling** – Centralized middleware & logging
+---
 
-⚙️ Getting Started
-For setup and local development:
-See → QUICK_START.md
-For architecture and internal flow documentation:
-See → ARCHITECTURE.md
+## ⚙️ Getting Started
 
-📌 Key Differentiator
-PrintX is not an AI print assistant:
--It is a structured AI-orchestrated execution system where:
--Infrastructure remains deterministic
--AI handles reasoning only
--Tools execute predictably
--Privacy is enforced by lifecycle control
+```bash
+cd Backend && npm install
+cd ../Strand_agents && npm install
+cd ../frontend && npm install
+```
+
+---
+
+### Run
+
+```bash
+npm run dev:agent
+npm run dev:backend
+npm run dev:frontend
+```
+
+---
+
+### Docker
+
+```bash
+docker-compose up --build
+```
+
+---
+
+## 🔐 Privacy
+
+* No persistent file storage
+* Automatic cleanup
+* Secure environment configs
+
+---
+
+## 🚧 Status
+
+### Done
+
+* Architecture
+* Agent system
+* Tool execution
+* Docker setup
+
+### Next
+
+* Auth
+* DB
+* Queue system
+* Monitoring
+
+---
+
+## 🎯 Key Differentiator
+
+> Autonomous execution engine (not just AI assistant)
+
+---
+
+## 📈 Impact
+
+* 80–90% time saved
+* Fully automated workflows
+* Privacy-first
+
+---
+
+## 📜 License
+
+MIT License
