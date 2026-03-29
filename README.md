@@ -203,7 +203,7 @@ PrintX/
 ```bash
 cd Backend && npm install
 cd ../Strand_agents && npm install
-cd ../frontend && npm install
+cd ../frontend && yarn install
 ```
 
 ---
@@ -213,7 +213,7 @@ cd ../frontend && npm install
 ```bash
 npm run dev:agent
 npm run dev:backend
-npm run dev:frontend
+yarn start:frontend
 ```
 
 ---
@@ -232,25 +232,6 @@ docker-compose up --build
 * Automatic cleanup
 * Secure environment configs
 
----
-
-## 🚧 Status
-
-### Done
-
-* Architecture
-* Agent system
-* Tool execution
-* Docker setup
-
-### Next
-
-* Auth
-* DB
-* Queue system
-* Monitoring
-
----
 
 ## 🎯 Key Differentiator
 
